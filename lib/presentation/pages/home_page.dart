@@ -127,9 +127,10 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     SizedBox(height: 14.h),
+
                     // const Center(child: Text("No Order yet.")),
 
-                    // [FOR REFRESH INDICATOR]//
+                    // [IN ORDER TO USE REFRESH INDICATOR]//
                     SizedBox(
                       height: 600,
                       child: ListView.builder(

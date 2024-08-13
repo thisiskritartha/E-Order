@@ -46,7 +46,7 @@ Widget buildCatalogsItem(BuildContext context, String image, String name, String
                   name,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 18.0.sp,
+                    fontSize: 14.0.sp,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
