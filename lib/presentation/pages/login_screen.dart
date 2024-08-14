@@ -1,4 +1,4 @@
-import 'package:e_order/presentation/widgets/email_field.dart';
+import 'package:e_order/presentation/widgets/custom_text_field.dart';
 import 'package:e_order/presentation/widgets/password_field.dart';
 import 'package:e_order/presentation/widgets/submit_button.dart';
 import 'package:flutter/material.dart';
@@ -47,9 +47,26 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 80.h),
-                    const EmailField(),
+                    CustomTextField<LoginBloc, LoginEvent, LoginState>(
+                      labelText: 'Email',
+                      hintText: 'example@domain.com',
+                      icon: const Icon(Icons.person_outline, color: Colors.blueAccent),
+                      onChange: (value) {
+                        context.read<LoginBloc>().add(LoginEmailChanged(value));
+                      },
+                    ),
                     SizedBox(height: 12.h),
-                    const PasswordField(),
+                    PasswordField<LoginBloc, LoginEvent, LoginState>(
+                      labelText: 'Password',
+                      hintText: 'Password',
+                      onChange: (value) {
+                        context.read<LoginBloc>().add(LoginPasswordChanged(value));
+                      },
+                      onChangeToggle: () {
+                        context.read<LoginBloc>().add(TogglePasswordVisibility());
+                      },
+                      isPasswordVisibleSelector: (state) => state.isPasswordVisible,
+                    ),
                     SizedBox(height: 30.h),
                     SubmitButton(
                       buttonName: 'Login',
@@ -58,8 +75,26 @@ class LoginScreen extends StatelessWidget {
                           context.read<LoginBloc>().add(LoginSubmitted());
                         }
                       },
-                      // isLoading: true,
                     ),
+                    SizedBox(height: 8.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Don't have an account?"),
+                        SizedBox(width: 2.w),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/register");
+                          },
+                          child: const Text(
+                            "Register",
+                            style: TextStyle(
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),

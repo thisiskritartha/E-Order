@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../logic/login/login_bloc.dart';
+class PasswordField<T extends Bloc<E, S>, E, S> extends StatelessWidget {
+  final String labelText;
+  final String hintText;
+  final void Function(String) onChange;
+  final void Function() onChangeToggle;
+  final bool Function(S) isPasswordVisibleSelector;
 
-class PasswordField extends StatelessWidget {
-  const PasswordField({super.key});
+  const PasswordField({
+    super.key,
+    required this.labelText,
+    required this.hintText,
+    required this.onChange,
+    required this.onChangeToggle,
+    required this.isPasswordVisibleSelector,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
+    return BlocBuilder<T, S>(
       builder: (context, state) {
+        final isPasswordVisible = isPasswordVisibleSelector(state);
         return TextFormField(
           decoration: InputDecoration(
-            labelText: 'Password',
-            hintText: 'Password',
+            labelText: labelText,
+            hintText: hintText,
             hintStyle: const TextStyle(color: Colors.grey),
             labelStyle: const TextStyle(color: Colors.blueAccent),
             border: OutlineInputBorder(
@@ -25,12 +37,10 @@ class PasswordField extends StatelessWidget {
             ),
             suffixIcon: IconButton(
               icon: Icon(
-                state.isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                isPasswordVisible ? Icons.visibility : Icons.visibility_off,
                 color: Colors.blueAccent,
               ),
-              onPressed: () {
-                context.read<LoginBloc>().add(TogglePasswordVisibility());
-              },
+              onPressed: onChangeToggle,
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.0),
@@ -65,13 +75,11 @@ class PasswordField extends StatelessWidget {
             filled: true,
             fillColor: Colors.blueAccent.withOpacity(0.05),
           ),
-          obscureText: !state.isPasswordVisible,
+          obscureText: !isPasswordVisible,
           cursorColor: Colors.blueAccent,
           keyboardType: TextInputType.emailAddress,
           style: const TextStyle(color: Colors.blueAccent),
-          onChanged: (value) => context.read<LoginBloc>().add(
-                LoginPasswordChanged(value),
-              ),
+          onChanged: onChange,
           validator: (value) {
             // const passwordPattern = r'^(?=.*[0-9])(?=.*[!@#\$&*~]).{6,}$';
             // final regExp = RegExp(passwordPattern);

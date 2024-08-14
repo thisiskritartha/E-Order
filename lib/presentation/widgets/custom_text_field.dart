@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../logic/login/login_bloc.dart';
-
-class EmailField extends StatelessWidget {
-  const EmailField({super.key});
+class CustomTextField<T extends Bloc<E, S>, E, S> extends StatelessWidget {
+  final String labelText;
+  final String hintText;
+  final Icon icon;
+  final void Function(String) onChange;
+  const CustomTextField({
+    super.key,
+    required this.labelText,
+    required this.hintText,
+    required this.icon,
+    required this.onChange,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
+    return BlocBuilder<T, S>(
       builder: (context, state) {
         return TextFormField(
           decoration: InputDecoration(
-            labelText: 'Email',
-            hintText: 'email@domain.com',
+            labelText: labelText,
+            hintText: hintText,
             hintStyle: const TextStyle(color: Colors.grey),
             labelStyle: const TextStyle(color: Colors.blueAccent),
             border: OutlineInputBorder(
@@ -52,21 +60,18 @@ class EmailField extends StatelessWidget {
               ),
             ),
             errorStyle: const TextStyle(color: Colors.redAccent),
-            prefixIcon: const Icon(Icons.person_outline, color: Colors.blueAccent),
+            prefixIcon: icon,
+            // prefixIcon: const Icon(Icons.person_outline, color: Colors.blueAccent),
             filled: true,
             fillColor: Colors.blueAccent.withOpacity(0.05),
           ),
           cursorColor: Colors.blueAccent,
           keyboardType: TextInputType.emailAddress,
           style: const TextStyle(color: Colors.blueAccent),
-          onChanged: (value) => context.read<LoginBloc>().add(
-                LoginEmailChanged(value),
-              ),
+          onChanged: onChange,
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return 'Please enter your email';
-            } else if (!value.contains('@')) {
-              return 'Invalid Email.';
+              return 'Please enter your $labelText';
             }
             return null;
           },

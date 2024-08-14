@@ -1,15 +1,17 @@
 import 'package:e_order/data/repository/catalog_repository.dart';
 import 'package:e_order/data/repository/login_repository.dart';
 import 'package:e_order/data/repository/product_repository.dart';
-import 'package:e_order/logic/Button/button_bloc.dart';
+import 'package:e_order/data/repository/register_repository.dart';
 import 'package:e_order/logic/catalogs/catalogs_bloc.dart';
 import 'package:e_order/logic/products/products_bloc.dart';
+import 'package:e_order/logic/register/register_bloc.dart';
 import 'package:e_order/presentation/router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'logic/button/button_bloc.dart';
 import 'logic/login/login_bloc.dart';
 
 class App extends StatelessWidget {
@@ -40,6 +42,7 @@ class App extends StatelessWidget {
               return MultiBlocProvider(
                 providers: [
                   BlocProvider(create: (context) => LoginBloc(loginRepository: LoginRepository())),
+                  BlocProvider(create: (context) => RegisterBloc(registerRepository: RegisterRepository())),
                   BlocProvider(create: (context) => CatalogsBloc(catalogRepository: CatalogRepository())),
                   BlocProvider(create: (context) => ProductsBloc(productRepository: ProductRepository())),
                   BlocProvider(create: (context) => ButtonBloc()),
@@ -48,7 +51,7 @@ class App extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   title: "E-Order",
                   initialRoute: authToken == null ? "/" : "/home_page",
-                  // initialRoute: "/",
+                  //initialRoute: "/register",
                   onGenerateRoute: appRouter.onGenerateRoute,
                 ),
               );

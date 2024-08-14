@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../logic/Button/button_bloc.dart';
+import '../../logic/button/button_bloc.dart';
 
 class SubmitButton extends StatelessWidget {
   final String buttonName;

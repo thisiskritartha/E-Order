@@ -21,6 +21,11 @@ class _HomePageState extends State<HomePage> {
     return sf.getString("name");
   }
 
+  Future<void> logOut() async {
+    await sf.remove("token");
+    await sf.remove("name");
+  }
+
   @override
   Widget build(BuildContext context) {
     getName();
@@ -41,25 +46,42 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 20.h),
-                    FutureBuilder<String?>(
-                      future: getName(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
-                          return const Center(child: CircularProgressIndicator());
-                        } else if (snapshot.hasError) {
-                          return const Center(child: Text('Failed to load name'));
-                        } else if (snapshot.hasData) {
-                          return Text(
-                            "Hello, ${snapshot.data ?? "user"}!",
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        FutureBuilder<String?>(
+                          future: getName(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return const Center(child: CircularProgressIndicator());
+                            } else if (snapshot.hasError) {
+                              return const Center(child: Text('Failed to load name'));
+                            } else if (snapshot.hasData) {
+                              return Text(
+                                "Hello, ${snapshot.data ?? "user"}!",
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.grey,
+                                ),
+                              );
+                            }
+                            return const Text("Hello, user");
+                          },
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            logOut();
+                            Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
+                          },
+                          child: Text(
+                            "Log out",
                             style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey,
+                              fontSize: 12.sp,
                             ),
-                          );
-                        }
-                        return const Text("Hello, user");
-                      },
+                          ),
+                        )
+                      ],
                     ),
                     SizedBox(height: 8.h),
                     Text(
