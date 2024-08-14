@@ -34,16 +34,6 @@ class RegisterModel {
   bool? get success => _success;
   Data? get data => _data;
   num? get message => _message;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['success'] = _success;
-    // if (_data != null) {
-    //   map['data'] = _data?.toJson();
-    // }
-    map['message'] = _message;
-    return map;
-  }
 }
 
 /// status : "success"
@@ -90,17 +80,6 @@ class Data {
   CustomerToken? get customerToken => _customerToken;
   String? get token => _token;
   String? get message => _message;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['status'] = _status;
-    if (_customerToken != null) {
-      map['Customer_Token'] = _customerToken?.toJson();
-    }
-    map['token'] = _token;
-    map['message'] = _message;
-    return map;
-  }
 }
 
 /// name : "test name"
@@ -195,19 +174,4 @@ class CustomerToken {
   String? get updatedAt => _updatedAt;
   String? get createdAt => _createdAt;
   num? get id => _id;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['name'] = _name;
-    map['email'] = _email;
-    map['phone'] = _phone;
-    map['address'] = _address;
-    map['city'] = _city;
-    map['state'] = _state;
-    map['country'] = _country;
-    map['updated_at'] = _updatedAt;
-    map['created_at'] = _createdAt;
-    map['id'] = _id;
-    return map;
-  }
 }
