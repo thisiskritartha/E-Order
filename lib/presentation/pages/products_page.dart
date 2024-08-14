@@ -30,10 +30,10 @@ class ProductsPage extends StatelessWidget {
                     child: Text("Empty Product"),
                   )
                 : ListView.builder(
-                    itemCount: products?.length,
+                    itemCount: products.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(products![index].name!),
+                        title: Text(products[index].name!),
                         subtitle: Text(products[index].description!),
                       );
                     },

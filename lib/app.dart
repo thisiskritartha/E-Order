@@ -6,6 +6,7 @@ import 'package:e_order/logic/catalogs/catalogs_bloc.dart';
 import 'package:e_order/logic/products/products_bloc.dart';
 import 'package:e_order/logic/register/register_bloc.dart';
 import 'package:e_order/presentation/router/app_router.dart';
+import 'package:e_order/utility/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,7 +51,7 @@ class App extends StatelessWidget {
                 child: MaterialApp(
                   debugShowCheckedModeBanner: false,
                   title: "E-Order",
-                  initialRoute: authToken == null ? "/" : "/home_page",
+                  initialRoute: authToken == null ? loginRoute : homeRoute,
                   //initialRoute: "/register",
                   onGenerateRoute: appRouter.onGenerateRoute,
                 ),

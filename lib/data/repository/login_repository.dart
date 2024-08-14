@@ -10,12 +10,10 @@ class LoginRepository {
 
   Future<UserModel> login(String email, String password) async {
     try {
-      final response = await DataProvider.postRequest(
-          endpoint: "https://eorder-be.palika.site/api/customers/login",
-          body: {
-            'email': email,
-            'password': password,
-          });
+      final response = await DataProvider.postRequest(endpoint: "/customers/login", body: {
+        'email': email,
+        'password': password,
+      });
 
       if (response.statusCode == 200) {
         UserModel user = UserModel.fromJson(jsonDecode(response.body));

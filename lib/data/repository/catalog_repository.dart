@@ -13,7 +13,7 @@ class CatalogRepository {
     final String? token = sf.getString("token");
     try {
       final response = await DataProvider.getRequest(
-        endpoint: "https://eorder-be.palika.site/api/catalogs",
+        endpoint: "/catalogs",
         token: token!,
       );
 

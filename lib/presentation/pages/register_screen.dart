@@ -1,6 +1,7 @@
 import 'package:e_order/presentation/widgets/custom_text_field.dart';
 import 'package:e_order/presentation/widgets/password_field.dart';
 import 'package:e_order/presentation/widgets/submit_button.dart';
+import 'package:e_order/utility/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +27,7 @@ class RegisterScreen extends StatelessWidget {
                 content: Text("Register Success"),
               ));
               // Navigator.pushNamed(context, "/home_page");
-              Navigator.pushNamedAndRemoveUntil(context, "/home_page", (route) => false);
+              Navigator.pushNamedAndRemoveUntil(context, homeRoute, (route) => false);
             }
           },
           child: Center(
@@ -134,7 +135,7 @@ class RegisterScreen extends StatelessWidget {
                           SizedBox(width: 2.w),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, "/");
+                              Navigator.pushNamed(context, loginRoute);
                             },
                             child: const Text(
                               "Login",
