@@ -41,16 +41,6 @@ class CatalogModel {
   bool? get success => _success;
   List<Data>? get data => _data;
   String? get message => _message;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['success'] = _success;
-    if (_data != null) {
-      map['data'] = _data?.map((v) => v.toJson()).toList();
-    }
-    map['message'] = _message;
-    return map;
-  }
 }
 
 /// id : 1
@@ -97,13 +87,4 @@ class Data {
   String? get name => _name;
   String? get image => _image;
   String? get imageUrl => _imageUrl;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = _id;
-    map['name'] = _name;
-    map['image'] = _image;
-    map['image_url'] = _imageUrl;
-    return map;
-  }
 }

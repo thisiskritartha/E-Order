@@ -34,16 +34,6 @@ class UserModel {
   bool? get success => _success;
   Data? get data => _data;
   String? get message => _message;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['success'] = _success;
-    if (_data != null) {
-      map['data'] = _data?.toJson();
-    }
-    map['message'] = _message;
-    return map;
-  }
 }
 
 /// customer : {"id":1,"name":"Customer","email":"customer@gmail.com","phone":null,"address":null,"city":null,"state":null,"country":null,"created_at":"2024-07-25T06:49:47.000000Z","updated_at":"2024-07-25T06:49:47.000000Z"}
@@ -74,15 +64,6 @@ class Data {
       );
   Customer? get customer => _customer;
   String? get customerToken => _customerToken;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    if (_customer != null) {
-      map['customer'] = _customer?.toJson();
-    }
-    map['Customer_Token'] = _customerToken;
-    return map;
-  }
 }
 
 /// id : 1
@@ -177,19 +158,4 @@ class Customer {
   dynamic get country => _country;
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = _id;
-    map['name'] = _name;
-    map['email'] = _email;
-    map['phone'] = _phone;
-    map['address'] = _address;
-    map['city'] = _city;
-    map['state'] = _state;
-    map['country'] = _country;
-    map['created_at'] = _createdAt;
-    map['updated_at'] = _updatedAt;
-    return map;
-  }
 }

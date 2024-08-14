@@ -39,16 +39,6 @@ class ProductModel {
   bool? get success => _success;
   List<Data>? get data => _data;
   String? get message => _message;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['success'] = _success;
-    if (_data != null) {
-      map['data'] = _data?.map((v) => v.toJson()).toList();
-    }
-    map['message'] = _message;
-    return map;
-  }
 }
 
 /// id : 1
@@ -143,19 +133,4 @@ class Data {
   String? get createdAt => _createdAt;
   String? get updatedAt => _updatedAt;
   String? get imageUrl => _imageUrl;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = _id;
-    map['catalog_id'] = _catalogId;
-    map['listers_id'] = _listersId;
-    map['name'] = _name;
-    map['image'] = _image;
-    map['price'] = _price;
-    map['description'] = _description;
-    map['created_at'] = _createdAt;
-    map['updated_at'] = _updatedAt;
-    map['image_url'] = _imageUrl;
-    return map;
-  }
 }
