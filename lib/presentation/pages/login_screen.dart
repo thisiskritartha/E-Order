@@ -26,8 +26,12 @@ class LoginScreen extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text("Login Success"),
               ));
-              // Navigator.pushNamed(context, "/home_page");
               Navigator.pushNamedAndRemoveUntil(context, homeRoute, (route) => false);
+            } else if (state.isFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text("Invalid email or password."),
+              ));
+              Navigator.pushNamedAndRemoveUntil(context, loginRoute, (route) => false);
             }
           },
           child: Center(
