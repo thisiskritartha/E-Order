@@ -49,8 +49,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           country: state.country,
           city: state.city,
         );
-        if (user != null) {
+        if (user!.success!) {
           emit(state.copyWith(isSuccess: true));
+        } else {
+          emit(state.copyWith(isFailure: true));
         }
       } catch (_) {
         emit(state.copyWith(isFailure: true, isSubmitting: false));

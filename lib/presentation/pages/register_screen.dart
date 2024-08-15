@@ -26,8 +26,12 @@ class RegisterScreen extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text("Register Success"),
               ));
-              // Navigator.pushNamed(context, "/home_page");
               Navigator.pushNamedAndRemoveUntil(context, homeRoute, (route) => false);
+            } else if (state.isFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text("Registration Failed."),
+              ));
+              Navigator.pushNamedAndRemoveUntil(context, registerRoute, (route) => false);
             }
           },
           child: Center(
