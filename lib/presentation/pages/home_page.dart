@@ -40,7 +40,8 @@ class _HomePageState extends State<HomePage> {
               context.read<CatalogsBloc>().add(CatalogsFetchedEvent());
             },
             child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
+              // physics: const BouncingScrollPhysics(),
+              physics: const AlwaysScrollableScrollPhysics(),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.0.h),
                 child: Column(
@@ -150,62 +151,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     SizedBox(height: 14.h),
-
-                    // const Center(child: Text("No Order yet.")),
-
-                    // [IN ORDER TO USE REFRESH INDICATOR]//
-                    SizedBox(
-                      height: 600,
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: 10,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: EdgeInsets.only(right: 14.0.w),
-                              padding: EdgeInsets.symmetric(vertical: 10.0.h),
-                              width: 130.0,
-                              height: 130.0,
-                              child: Stack(
-                                children: [
-                                  Positioned.fill(
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(12.0.r),
-                                      child: Image.asset(
-                                        "assets/images/random.png",
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    bottom: 0,
-                                    left: 0,
-                                    right: 0,
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(vertical: 4.0.h),
-                                      decoration: BoxDecoration(
-                                        color: Colors.black54,
-                                        borderRadius: BorderRadius.only(
-                                          bottomLeft: Radius.circular(12.0.r),
-                                          bottomRight: Radius.circular(12.0.r),
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "Test ${index + 1}",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18.0.sp,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }),
-                    )
+                    const Center(child: Text("No Order yet.")),
                   ],
                 ),
               ),

@@ -42,8 +42,9 @@ class RegisterScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
+                      SizedBox(height: 20.h),
                       Text(
                         "Register to EOrder",
                         style: TextStyle(
@@ -149,7 +150,8 @@ class RegisterScreen extends StatelessWidget {
                             ),
                           ),
                         ],
-                      )
+                      ),
+                      SizedBox(height: 20.h),
                     ],
                   ),
                 ),

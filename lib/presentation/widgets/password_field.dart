@@ -84,9 +84,10 @@ class PasswordField<T extends Bloc<E, S>, E, S> extends StatelessWidget {
             // const passwordPattern = r'^(?=.*[0-9])(?=.*[!@#\$&*~]).{6,}$';
             // final regExp = RegExp(passwordPattern);
             //
-            // if (value == null || value.isEmpty) {
-            //   return 'Please enter your password';
-            // } else if (!regExp.hasMatch(value)) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter your password';
+            }
+            // else if (!regExp.hasMatch(value)) {
             //   return 'Password must be 6+ character with a number & special character';
             // }
             return null;
