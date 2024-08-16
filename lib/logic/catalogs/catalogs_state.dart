@@ -18,6 +18,19 @@ final class CatalogsFetchedState extends CatalogsState {
   List<Object> get props => [catalogs];
 }
 
+class CatalogImagePickerState extends CatalogsState {
+  @override
+  List<Object?> get props => [];
+}
+
+class CatalogImagePickerSuccessState extends CatalogsState {
+  final XFile? image;
+
+  const CatalogImagePickerSuccessState(this.image);
+  @override
+  List<Object?> get props => [image];
+}
+
 class CatalogsError extends CatalogsState {
   final String message;
 

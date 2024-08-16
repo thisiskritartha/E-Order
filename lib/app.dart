@@ -52,7 +52,7 @@ class App extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   title: "E-Order",
                   initialRoute: authToken == null ? loginRoute : homeRoute,
-                  //initialRoute: "/register",
+                  //initialRoute: catalogRoute,
                   onGenerateRoute: appRouter.onGenerateRoute,
                 ),
               );

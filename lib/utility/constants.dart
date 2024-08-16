@@ -6,3 +6,4 @@ const String loginRoute = "/";
 const String homeRoute = "/home_page";
 const String productRoute = "/product";
 const String registerRoute = "/register";
+const String catalogRoute = "/catalog";

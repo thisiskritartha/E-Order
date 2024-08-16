@@ -103,9 +103,14 @@ class _HomePageState extends State<HomePage> {
                           "Catalogs",
                           style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
                         ),
-                        Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          size: 15.r,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, catalogRoute);
+                          },
+                          child: Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: 15.r,
+                          ),
                         ),
                       ],
                     ),

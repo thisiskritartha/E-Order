@@ -1,3 +1,4 @@
+import 'package:e_order/presentation/pages/catalog_page.dart';
 import 'package:e_order/presentation/pages/home_page.dart';
 import 'package:e_order/presentation/pages/login_screen.dart';
 import 'package:e_order/presentation/pages/products_page.dart';
@@ -24,6 +25,9 @@ class AppRouter {
 
       case registerRoute:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
+
+      case catalogRoute:
+        return MaterialPageRoute(builder: (_) => CatalogPage());
 
       default:
         return null;
