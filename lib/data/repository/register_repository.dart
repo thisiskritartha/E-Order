@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/register_model.dart';
-import '../provider/data_provider.dart';
+import '../../models/register_model.dart';
+import '../../provider/data_provider.dart';
 
 class RegisterRepository {
   DataProvider dataProvider = DataProvider();
