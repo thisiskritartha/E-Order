@@ -14,6 +14,14 @@ final class CatalogsImageUploadEvent extends CatalogsEvent {
   List<Object?> get props => [];
 }
 
+final class CatalogsNameChanged extends CatalogsEvent {
+  final String name;
+
+  const CatalogsNameChanged(this.name);
+  @override
+  List<Object?> get props => [name];
+}
+
 final class CatalogsPickImageEvent extends CatalogsEvent {
   final XFile? image;
 

@@ -14,17 +14,24 @@ class CatalogsBloc extends Bloc<CatalogsEvent, CatalogsState> {
     on<CatalogsFetchedEvent>((event, emit) async {
       try {
         final catalogs = await catalogRepository.getCatalog();
-        emit(CatalogsFetchedState(catalogs));
+        emit(state.copyWith(catalogs: catalogs));
       } catch (e) {
-        emit(const CatalogsError('Failed to fetch catalogs'));
+        // emit(const CatalogsError('Failed to fetch catalogs'));
+        emit(state.copyWith(isFailure: true));
       }
+    });
+
+    on<CatalogsNameChanged>((event, emit) async {
+      emit(state.copyWith(name: event.name));
     });
 
     on<CatalogsPickImageEvent>((event, emit) async {
       try {
-        emit(CatalogImagePickerSuccessState(event.image));
+        // emit(CatalogImagePickerSuccessState(event.image));
+        emit(state.copyWith(image: event.image));
       } catch (e) {
-        emit(const CatalogsError('Failed to Upload catalogs image.'));
+        //emit(const CatalogsError('Failed to Upload catalogs image.'));
+        emit(state.copyWith(isFailure: true));
       }
     });
   }

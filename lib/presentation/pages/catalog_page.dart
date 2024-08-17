@@ -29,8 +29,8 @@ class CatalogPage extends StatelessWidget {
                 builder: (context, state) {
                   if (state is CatalogsLoadingState) {
                     return const Center(child: CircularProgressIndicator());
-                  } else if (state is CatalogsFetchedState) {
-                    final catalogs = state.catalogs.data ?? [];
+                  } else if (state.catalogs != null) {
+                    final catalogs = state.catalogs?.data ?? [];
                     return SizedBox(
                       height: 610.h,
                       child: ListView.builder(
@@ -96,7 +96,7 @@ class CatalogPage extends StatelessWidget {
                         },
                       ),
                     );
-                  } else if (state is CatalogsError) {
+                  } else if (state.isFailure!) {
                     return const Center(child: Text('Failed to load catalogs'));
                   }
                   return const SizedBox.shrink();
@@ -135,17 +135,11 @@ class CatalogPage extends StatelessWidget {
                         icon: const Icon(Icons.add_card_outlined, color: Colors.blueAccent),
                         onChange: (value) {
                           // context.read<CatalogsBloc>().add(LoginEmailChanged(value));
+                          context.read<CatalogsBloc>().add(CatalogsNameChanged(value));
                         },
                       ),
                       SizedBox(height: 20.0.h),
-                      BlocConsumer<CatalogsBloc, CatalogsState>(
-                        listener: (context, state) {
-                          if (state is CatalogImagePickerSuccessState) {
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                              content: Text("Image Picked success"),
-                            ));
-                          }
-                        },
+                      BlocBuilder<CatalogsBloc, CatalogsState>(
                         builder: (context, state) {
                           return GestureDetector(
                             onTap: () async {
@@ -159,7 +153,7 @@ class CatalogPage extends StatelessWidget {
                                 context.read<CatalogsBloc>().add(CatalogsPickImageEvent(image));
                               }
                             },
-                            child: (state is! CatalogImagePickerSuccessState)
+                            child: (state.image == null)
                                 ? Container(
                                     height: 200.h,
                                     width: double.infinity,

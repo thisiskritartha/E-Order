@@ -118,8 +118,8 @@ class _HomePageState extends State<HomePage> {
                       builder: (context, state) {
                         if (state is CatalogsLoadingState) {
                           return const Center(child: CircularProgressIndicator());
-                        } else if (state is CatalogsFetchedState) {
-                          final catalogs = state.catalogs.data ?? [];
+                        } else if (state.catalogs != null) {
+                          final catalogs = state.catalogs?.data ?? [];
                           return SizedBox(
                             height: 120.h,
                             child: ListView.builder(
@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                               },
                             ),
                           );
-                        } else if (state is CatalogsError) {
+                        } else if (state.isFailure!) {
                           return const Center(child: Text('Failed to load catalogs'));
                         }
                         return const SizedBox.shrink();
