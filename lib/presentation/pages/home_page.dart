@@ -117,7 +117,12 @@ class _HomePageState extends State<HomePage> {
                     BlocBuilder<CatalogsBloc, CatalogsState>(
                       builder: (context, state) {
                         if (state is CatalogsLoadingState) {
-                          return const Center(child: CircularProgressIndicator());
+                          return SizedBox(
+                            height: 120.h,
+                            child: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
                         } else if (state.catalogs != null) {
                           final catalogs = state.catalogs?.data ?? [];
                           return SizedBox(
@@ -146,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Orders",
+                          "Products",
                           style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14.sp),
                         ),
                         Icon(
@@ -156,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     SizedBox(height: 14.h),
-                    const Center(child: Text("No Order yet.")),
+                    const Center(child: Text("No Products yet.")),
                   ],
                 ),
               ),
