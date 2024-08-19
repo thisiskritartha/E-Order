@@ -141,7 +141,12 @@ class _HomePageState extends State<HomePage> {
                             ),
                           );
                         } else if (state.isFailure!) {
-                          return const Center(child: Text('Failed to load catalogs'));
+                          return SizedBox(
+                            height: 120.h,
+                            child: const Center(
+                              child: Text('Failed to load catalogs'),
+                            ),
+                          );
                         }
                         return const SizedBox.shrink();
                       },
