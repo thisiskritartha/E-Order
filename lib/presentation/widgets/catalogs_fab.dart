@@ -38,7 +38,6 @@ FloatingActionButton catalogsFab(BuildContext context) {
                     hintText: 'Catalog Name',
                     icon: const Icon(Icons.add_card_outlined, color: Colors.blueAccent),
                     onChange: (value) {
-                      // context.read<CatalogsBloc>().add(LoginEmailChanged(value));
                       context.read<CatalogsBloc>().add(CatalogsNameChanged(value));
                     },
                   ),

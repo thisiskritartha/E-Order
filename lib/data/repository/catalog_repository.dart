@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:e_order/data/models/catalog_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +23,33 @@ class CatalogRepository {
         return catalogs;
       } else {
         throw "Error while fetching catalogs.";
+      }
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<CatalogModel> postCatalog(
+    String catalogName,
+    File image,
+  ) async {
+    SharedPreferences sf = await SharedPreferences.getInstance();
+    final String? token = sf.getString("token");
+    try {
+      final response = await DataProvider.postRequest(
+        endpoint: "/catalogs/store",
+        body: {
+          'name': catalogName,
+          'image': image,
+        },
+        token: token!,
+      );
+
+      if (response.statusCode == 200) {
+        CatalogModel catalogs = CatalogModel.fromJson(jsonDecode(response.body));
+        return catalogs;
+      } else {
+        throw "Error while posting catalogs.";
       }
     } catch (_) {
       rethrow;
