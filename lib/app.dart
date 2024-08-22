@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:e_order/data/repository/catalog_repository.dart';
 import 'package:e_order/data/repository/login_repository.dart';
 import 'package:e_order/data/repository/product_repository.dart';
@@ -17,8 +18,9 @@ import 'logic/login/login_bloc.dart';
 
 class App extends StatelessWidget {
   final AppRouter appRouter;
+  final Connectivity connectivity;
 
-  const App({super.key, required this.appRouter});
+  const App({super.key, required this.appRouter, required this.connectivity});
 
   Future<String?> getToken() async {
     SharedPreferences sf = await SharedPreferences.getInstance();

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -10,11 +11,20 @@ part 'catalogs_state.dart';
 
 class CatalogsBloc extends Bloc<CatalogsEvent, CatalogsState> {
   final CatalogRepository catalogRepository;
+  late List<ConnectivityResult> connectivityResult;
+
   CatalogsBloc({required this.catalogRepository}) : super(CatalogsLoadingState()) {
     on<CatalogsFetchedEvent>((event, emit) async {
       try {
-        final catalogs = await catalogRepository.getCatalog();
-        emit(state.copyWith(catalogs: catalogs));
+        connectivityResult = await (Connectivity().checkConnectivity());
+        if (connectivityResult.contains(ConnectivityResult.mobile) ||
+            connectivityResult.contains(ConnectivityResult.mobile)) {
+          final catalogs = await catalogRepository.getCatalog();
+          catalogRepository.saveCatalogLocally(catalog: catalogs);
+          emit(state.copyWith(catalogs: catalogs));
+        }
+        final catalogs = await catalogRepository.fetchAllLocalCatalog();
+        emit(state.copyWith(catalogs: catalogs[0]));
       } catch (e) {
         // emit(const CatalogsError('Failed to fetch catalogs'));
         emit(state.copyWith(isFailure: true));

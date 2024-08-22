@@ -4,6 +4,10 @@
 /// {"id":2,"name":"Test1","image":"1723463066_random.png","image_url":"https://eorder-be.palika.site/storage/catalogs/1723463066_random.png"}]
 /// message : "Catalogs Retrieved"
 
+import 'package:hive/hive.dart';
+part 'catalog_model.g.dart';
+
+@HiveType(typeId: 0)
 class CatalogModel {
   CatalogModel({
     bool? success,
@@ -25,9 +29,15 @@ class CatalogModel {
     }
     _message = json['message'];
   }
+  @HiveField(0)
   bool? _success;
+
+  @HiveField(1)
   List<Data>? _data;
+
+  @HiveField(2)
   String? _message;
+
   CatalogModel copyWith({
     bool? success,
     List<Data>? data,
@@ -48,6 +58,7 @@ class CatalogModel {
 /// image : "1721907603_table.jpeg"
 /// image_url : "https://eorder-be.palika.site/storage/catalogs/1721907603_table.jpeg"
 
+@HiveType(typeId: 1)
 class Data {
   Data({
     num? id,
@@ -67,10 +78,18 @@ class Data {
     _image = json['image'];
     _imageUrl = json['image_url'];
   }
+  @HiveField(0)
   num? _id;
+
+  @HiveField(1)
   String? _name;
+
+  @HiveField(2)
   String? _image;
+
+  @HiveField(3)
   String? _imageUrl;
+
   Data copyWith({
     num? id,
     String? name,

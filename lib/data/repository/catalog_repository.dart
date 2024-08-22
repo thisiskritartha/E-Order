@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:e_order/data/models/catalog_model.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../provider/data_provider.dart';
@@ -54,5 +55,15 @@ class CatalogRepository {
     } catch (_) {
       rethrow;
     }
+  }
+
+  final catalogBox = Hive.box("catalog_box");
+  Future<void> saveCatalogLocally({required CatalogModel catalog}) async {
+    await catalogBox.add(catalog);
+  }
+
+  Future<List<dynamic>> fetchAllLocalCatalog() async {
+    final localCatalog = catalogBox.values.toList();
+    return localCatalog;
   }
 }
