@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                                 "Hello, ${snapshot.data ?? "user"}!",
                                 style: TextStyle(
                                   fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w600,
                                   color: Colors.grey,
                                 ),
                               );
